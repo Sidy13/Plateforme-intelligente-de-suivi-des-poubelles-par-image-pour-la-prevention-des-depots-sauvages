@@ -1,0 +1,1 @@
+# Plateforme-intelligente-de-suivi-des-poubelles-par-image-pour-la-pr-vention-des-d-p-ts-sauvages
