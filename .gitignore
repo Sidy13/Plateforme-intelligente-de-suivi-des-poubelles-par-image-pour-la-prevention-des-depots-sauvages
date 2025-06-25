@@ -1,0 +1,19 @@
+venv/
+
+# Fichiers Python à ignorer
+__pycache__/
+*.py[cod]
+
+# Base de données locale
+db.sqlite3
+
+# Médias uploadés
+media/
+
+# Images générées
+*.png
+*.jpg
+*.jpeg
+
+# Variables d’environnement
+.env

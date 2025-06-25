@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload d’image</title>
+</head>
+<body>
+    <h1>Uploader une image de poubelle</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Envoyer</button>
+    </form>
+
+    {% if last_image %}
+        <h2>Image enregistrée :</h2>
+        <img src="{{ last_image.image.url }}" width="300">
+        <ul>
+            <li>Taille : {{ last_image.file_size_kb|floatformat:2 }} Ko</li>
+            <li>Dimensions : {{ last_image.width }}x{{ last_image.height }}</li>
+            <li>Couleur moyenne : ({{ last_image.avg_red }}, {{ last_image.avg_green }}, {{ last_image.avg_blue }})</li>
+        </ul>
+    {% endif %}
+</body>
+</html>
