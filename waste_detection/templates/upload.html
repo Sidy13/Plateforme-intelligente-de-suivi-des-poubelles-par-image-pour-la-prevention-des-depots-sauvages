@@ -20,5 +20,9 @@
             <li>Couleur moyenne : ({{ last_image.avg_red }}, {{ last_image.avg_green }}, {{ last_image.avg_blue }})</li>
         </ul>
     {% endif %}
+    <hr>
+    <h3>Statistiques globales :</h3>
+    <img src="{% url 'basic_stats' %}" alt="Graphique des annotations" width="400">
+
 </body>
 </html>

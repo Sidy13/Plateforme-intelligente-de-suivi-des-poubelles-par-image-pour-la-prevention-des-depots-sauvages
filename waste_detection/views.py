@@ -6,6 +6,13 @@ from .models import WasteImage
 from PIL import Image
 import os
 
+#importation pour la visualisation 
+import matplotlib.pyplot as plt
+from io import BytesIO
+from django.http import HttpResponse
+from .models import WasteImage
+
+
 def upload_image(request):
     last_image = None
     if request.method == 'POST':
@@ -34,3 +41,22 @@ def upload_image(request):
         form = WasteImageForm()
 
     return render(request, 'upload.html', {'form': form, 'last_image': last_image})
+
+
+def basic_stats(request):
+    # Ce code sert à compter les annotations 
+    pleines = WasteImage.objects.filter(annotation='pleine').count()
+    vides = WasteImage.objects.filter(annotation='vide').count()
+
+    # Cela permet de créer un graphe en barres
+    fig, ax = plt.subplots()
+    ax.bar(['Pleine', 'Vide'], [pleines, vides], width=0.5)
+    ax.set_title("Répartition des annotations")
+
+    # Ici, le graphe est gardé en mémoire (PNG)
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    plt.close(fig)
+    buffer.seek(0)
+
+    return HttpResponse(buffer.getvalue(), content_type='image/png')
